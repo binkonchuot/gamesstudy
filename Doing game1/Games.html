@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beer catcher game</title>
+    <script src="ChaiBeer.js"></script>
+    <script src="ThungBeer.js"></script>
+    <img src="img/bo0.jpg" height="960" width="960"/>
+    <style>
+        table {
+            border: solid black;
+            width: 700px;
+            border-collapse: collapse;
+        }
+
+        th, tr, td {
+            border: solid black;
+
+        }
+
+        img {
+            display: none;
+        }
+    </style>
+</head>
+<body onload="soundAll()">
+<canvas id="canvas1" width="700px" height="600px" style="background: url('img/bar4.jpg')"></canvas>
+
+<table id="scoreBoard">
+    <tr>
+        <th>Name</th>
+        <th>Point</th>
+    </tr>
+    <tr>
+        <td id="name"></td>
+        <td id="point"></td>
+    </tr>
+    <tr>
+        <td colspan="2"><img src="img/bo0.jpg" style="width: 450px;height: 500px; float: left" id="image"></td>
+    </tr>
+</table>
+<img src="img/thungbia.jpg" id="thungBeerImg">
+<img src="img/bar4.jpg" id="barImg">
+<img src="img/chaibia.jpg" id="beerBottleImg">
+<img src="img/bo0.jpg" id="gaiImg"/>
+<button style="position: absolute; left: 330px; top: 350px" id="start" type="button" onclick="start()">start</button>
+<button type="button" onclick="restart()">restart</button>
+
+</body>
+<script>
+    loadData();
+    let scoreBoard = loadData();
+    let thungBeerImg = document.getElementById('thungBeerImg');
+    let barImg = document.getElementById('barImg');
+    let beerBottleImg = document.getElementById('beerBottleImg');
+    let name = [];
+    let score = 0;
+    let canvas = document.getElementById('canvas1');
+    let ctx = canvas.getContext("2d");
+    let nhacNen;
+    let soundRestart;
+    let soundEndGame;
+    let soundGetScore;
+    let beerBottles = new ChaiBeer();
+    let thungBeer = new ThungBeer(150, 120)
+    thungBeer.init(canvas);
+
+
+    function drawScore() {
+        ctx.fillStyle = "#ffffff"
+        ctx.font = "30px Arial";
+        ctx.fillText("Point: " + score, 30, 50);
+
+    }
+
+    function clearSky() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+    }
+
+    function drawGameOver() {
+        clearInterval(timerId);
+        drawSky();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "30px Arial";
+        ctx.fillText("Game Over", 250, 200);
+    }
+
+    function drawSky() {
+        ctx.drawImage(barImg, 0, 0, 700, 650)
+    }
+
+    function draw() {
+        drawSky();
+        drawObject();
+    }
+
+    function drawObject() {
+        beerBottles.render(canvas);
+        thungBeer.render(canvas);
+        drawScore();
+
+    }
+    nhacNen = new Audio('sound/nhacnen1.mp3')
+    function start() {
+        timerId = setInterval(loop, 20);
+        let buttonStart = document.getElementById("start")
+        buttonStart.style.display = "none"
+        nhacNen.play()
+    }
+
+    function restart(){
+        clearInterval(timerId);
+        timerId = setInterval(loop, 20);
+        soundRestart = new Audio('sound/nhacnen2.mp3')
+        soundRestart.play()
+    }
+
+    function loop() {
+        beerBottles.update();
+        draw();
+    }
+
+    function getPoint() {
+        document.getElementById('point').innerHTML = score + 10;
+    }
+
+    function getName() {
+        name = prompt('tell me your name');
+        document.getElementById('name').innerHTML = name;
+    }
+
+    function saveData() {
+        localStorage.setItem('name', JSON.stringify(scoreBoard));
+    }
+
+    function loadData() {
+        if (localStorage.hasOwnProperty('name')) {
+            let data = JSON.parse(localStorage.getItem('name'));
+            return data;
+        } else {
+            return [];
+        }
+    }
+
+</script>
+</body>
+</html>
