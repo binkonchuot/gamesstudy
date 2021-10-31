@@ -35,21 +35,21 @@
         <td id="name"></td>
         <td id="point"></td>
     </tr>
-    <tr>
-        <td colspan="2"><img src="img/bo0.jpg" style="width: 450px;height: 500px; float: left" id="image"></td>
-    </tr>
+<!--    <tr>-->
+<!--        <td colspan="2"><img src="img/bo0.jpg" style="width: 450px;height: 500px; float: left" id="image"></td>-->
+<!--    </tr>-->
 </table>
 <img src="img/thungbia.jpg" id="thungBeerImg">
 <img src="img/bar4.jpg" id="barImg">
 <img src="img/chaibia.jpg" id="beerBottleImg">
-<img src="img/bo0.jpg" id="gaiImg"/>
+<!--<img src="img/bo0.jpg" id="gaiImg"/>-->
 <button style="position: absolute; left: 330px; top: 350px" id="start" type="button" onclick="start()">start</button>
 <button type="button" onclick="restart()">restart</button>
 
 </body>
 <script>
     loadData();
-    let scoreBoard = loadData();
+    // let scoreBoard = loadData();
     let thungBeerImg = document.getElementById('thungBeerImg');
     let barImg = document.getElementById('barImg');
     let beerBottleImg = document.getElementById('beerBottleImg');
@@ -72,10 +72,10 @@
         ctx.fillText("Point: " + score, 30, 50);
 
     }
-
-    function clearSky() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height)
-    }
+    //
+    // function clearSky() {
+    //     ctx.clearRect(0, 0, canvas.width, canvas.height)
+    // }
 
     function drawGameOver() {
         clearInterval(timerId);
@@ -100,18 +100,19 @@
         drawScore();
 
     }
-    nhacNen = new Audio('sound/nhacnen1.mp3')
+
     function start() {
         timerId = setInterval(loop, 20);
         let buttonStart = document.getElementById("start")
         buttonStart.style.display = "none"
+        nhacNen = new Audio('sound/nhacnen1.mp3')
         nhacNen.play()
     }
 
     function restart(){
         clearInterval(timerId);
         timerId = setInterval(loop, 20);
-        soundRestart = new Audio('sound/nhacnen2.mp3')
+        soundRestart = new Audio('sound/nhacnen1.mp3')
         soundRestart.play()
     }
 
@@ -121,7 +122,7 @@
     }
 
     function getPoint() {
-        document.getElementById('point').innerHTML = score + 10;
+        document.getElementById('point').innerHTML = score;
     }
 
     function getName() {
@@ -129,9 +130,9 @@
         document.getElementById('name').innerHTML = name;
     }
 
-    function saveData() {
-        localStorage.setItem('name', JSON.stringify(scoreBoard));
-    }
+    // function saveData() {
+    //     localStorage.setItem('name', JSON.stringify(scoreBoard));
+    // }
 
     function loadData() {
         if (localStorage.hasOwnProperty('name')) {

@@ -8,7 +8,6 @@ class ChaiBeer {
     init() {
         let positions = [78, 178, 278, 437];// tọa độ x xuất hiện bia
         this.x = positions[this.getRandomInt(0, 3)]; //lấy trong mảng position phần tử từ 0 đến 3
-
     }
 
     getRandomInt = function (min, max) {
@@ -25,7 +24,7 @@ class ChaiBeer {
 
     checkInThungBeer() {
 
-        if (this.y + 50 >= 410) {
+        if (this.y + 50 >= 430) {
             if (
                 (this.x > thungBeer.x) &&
                 (this.x < (thungBeer.x + thungBeer.width))
@@ -42,7 +41,7 @@ class ChaiBeer {
             } else {
                  this.y = 0;
                 nhacNen.pause();
-                soundRestart.pause();
+
                 soundEndGame = new Audio('sound/laugh.wav')
                 soundEndGame.play()
                 alert('game over');
@@ -51,8 +50,9 @@ class ChaiBeer {
                 score = 0;
                 this.speed = 0;
                 drawGameOver();
-                clearSky();
-                clearInterval(timerId);
+                soundRestart.pause();
+                // clearSky();
+                // clearInterval(timerId);
 
             }
         }
