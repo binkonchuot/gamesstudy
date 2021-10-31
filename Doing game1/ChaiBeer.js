@@ -6,12 +6,11 @@ class ChaiBeer {
     }
 
     init() {
-        let positions = [78, 178, 278, 437];// tọa độ x xuất hiện bia
-        this.x = positions[this.getRandomInt(0, 3)]; //lấy trong mảng position phần tử từ 0 đến 3
+        this.x =this.getRandomInt() //lấy trong mảng position phần tử từ 0 đến 3
     }
 
-    getRandomInt = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;//tạo hàm lấy số ngẫu nhiên
+    getRandomInt = function () {
+        return Math.floor(Math.random() * 600);//tạo hàm lấy số ngẫu nhiên
     }
 
 
@@ -51,12 +50,8 @@ class ChaiBeer {
                 this.speed = 0;
                 drawGameOver();
                 soundRestart.pause();
-                // clearSky();
-                // clearInterval(timerId);
-
             }
         }
-
     }
 
     render(canvas) {

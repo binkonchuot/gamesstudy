@@ -9,10 +9,10 @@ class ThungBeer {
     init(canvas) {
         canvas.addEventListener('mousemove', function (event) {
             processMouseMove(event);
-        })
+        }
+        )
 
         function processMouseMove(event) {
-            let rect = canvas.getBoundingClientRect();
             thungBeer.x = event.clientX - 50;
         }
     }
