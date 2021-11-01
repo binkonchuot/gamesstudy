@@ -40,7 +40,6 @@ class ChaiBeer {
             } else {
                  this.y = 0;
                 nhacNen.pause();
-
                 soundEndGame = new Audio('sound/laugh.wav')
                 soundEndGame.play()
                 alert('game over');
